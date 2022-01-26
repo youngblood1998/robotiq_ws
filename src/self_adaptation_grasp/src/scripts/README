@@ -1,0 +1,12 @@
+1.自适应抓取（无相机）
+机械臂、夹爪、传感器就绪
+rosrun self_adaptation update_data_to_pressure.py
+rosrun self_adaptation update_pub_takktile_buffer_data.py
+rosrun self_adaptation update_ttest_pub.py
+rosrun self_adaptation update_grasp.py
+
+2.（带相机）
+rosrun self_adaptation update_data_to_pressure.py
+rosrun self_adaptation update_pub_takktile_buffer_data.py
+rosrun self_adaptation update_ttest_pub.py
+rosrun self_adaptation ur5_grasp_force_adjustment.py
