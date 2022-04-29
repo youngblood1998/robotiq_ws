@@ -1,0 +1,12 @@
+启动夹爪
+rosrun robotiq_2f_gripper_control Robotiq2FGripperRtuNode.py /dev/ttyUSB0
+
+监听和控制（自带的）
+rosrun robotiq_2f_gripper_control Robotiq2FGripperStatusListener.py
+rosrun robotiq_2f_gripper_control Robotiq2FGripperSimpleController.py
+
+使用程序监听和控制
+rosrun robotiq_2f_gripper_control robotiq_listener.py
+rosrun robotiq_2f_gripper_control robotiq_controller.py
+测试
+rosrun robotiq_2f_gripper_control set_param.py
