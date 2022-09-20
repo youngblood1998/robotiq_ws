@@ -45,6 +45,7 @@ import roslib; roslib.load_manifest('robotiq_2f_gripper_control')
 import rospy
 from robotiq_2f_gripper_control.msg import _Robotiq2FGripper_robot_output  as outputMsg
 from time import sleep
+import time
 
 
 def genCommand(char, command):
@@ -106,11 +107,26 @@ def publisher():
     rospy.init_node('Robotiq2FGripperSimpleController')
     
     pub = rospy.Publisher('Robotiq2FGripperRobotOutput', outputMsg.Robotiq2FGripper_robot_output)
-
-    command = outputMsg.Robotiq2FGripper_robot_output();
-    #command = genCommand('r', command)
-    command = genCommand('a', command)
     rate = rospy.Rate(10)
+    command = outputMsg.Robotiq2FGripper_robot_output();
+    time1 = time.time()
+    time2 = time.time()
+    while time2-time1<0.5:
+        command = genCommand('r', command)
+        pub.publish(command)
+        time2 = time.time()
+        rate.sleep()
+    #rospy.sleep(1)
+    time3 = time.time()
+    while time3-time2<1:
+        command = genCommand('a', command)
+        pub.publish(command)
+        time3 = time.time()
+        rate.sleep()
+    #command = genCommand('a', command)
+    #pub.publish(command)
+    #rospy.sleep(1)
+    
     while not rospy.is_shutdown():
     # command = genCommand('a', command)            
         if rospy.search_param("/robotiq_command"):
